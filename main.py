@@ -8,6 +8,8 @@ def main():
 
     # await delay
     time.sleep(2)
+
+    print("Starting Cursor monitoring...")
     
     # Create audio monitor
     audio_monitor = AudioMonitor()

@@ -47,7 +47,6 @@ class LEDController:
         if self._ensure_connection():
             try:
                 self.serial_connection.write(b'1')
-                print("LED ON")
             except Exception as e:
                 print(f"Error turning LED on: {e}")
 
@@ -56,7 +55,6 @@ class LEDController:
         if self._ensure_connection():
             try:
                 self.serial_connection.write(b'0')
-                print("LED OFF")
             except Exception as e:
                 print(f"Error turning LED off: {e}")
 

@@ -2,7 +2,7 @@ import pyaudio
 import numpy as np
 import threading
 from typing import Callable
-
+import time
 class AudioMonitor:
     def __init__(self, 
                  chunk_size: int = 1024,
@@ -67,7 +67,11 @@ class AudioMonitor:
                     
                     # If volume exceeds threshold and callback is set, call it
                     if volume > self.volume_threshold and self.callback:
-                        self.callback(volume)
+                        current_time = time.time()
+                        if not hasattr(self, 'last_callback_time') or current_time - self.last_callback_time >= 1.0:
+                            print(f"Detected Cursor completion, triggering blink...")
+                            self.callback(volume)
+                            self.last_callback_time = current_time
                 except Exception as e:
                     print(f"Error reading audio: {e}")
                     break
